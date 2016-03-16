@@ -2,28 +2,27 @@ $( function() {
   var init = true, ans = "無料エロ動画";
   
   $("#inputarea > input[type='text']").each(function(){
-    $(this).bind('keyup', hoge(this));
+    $(this).bind('keydown', countStart(this));
+    $(this).bind('keyup', countStop(this));
   });
 
-  function hoge(elm){
-    var v, old = elm.value;
+  function countStart(elm){
     return function(){
       if( init ) {
         stopwatchStart();
         init = false;
       }
-      
-      if(ans == (v=elm.value)) {
+    }
+  }
+  
+  function countStop(elm){
+    var v = elm.value;
+    return function(){
+      if(ans == v && event.keyCode == "13") {
         stopwatchStop();
       }
-      
-      var str;
-      if(old != v){
-        old = v;
-        str = $(this).val();
-        $("#inpttext > p").text(str);
-      }
     }
+    
   }
 } );
 
