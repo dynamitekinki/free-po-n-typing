@@ -1,30 +1,19 @@
 $( function() {
+    
   var init = true, ans = "無料エロ動画";
-  
-  $("#inputarea > input[type='text']").each(function(){
-    $(this).bind('keydown', countStart(this));
-    $(this).bind('keyup', countStop(this));
-  });
-
-  function countStart(elm){
-    return function(){
-      if( init ) {
+  $("#inputarea > input[type='text']").mcInputEvent();
+  $("#inputarea > input[type='text']").on('input mcinput', function (e){
+      if( init && e.type == 'input'){
         stopwatchStart();
         init = false;
+      }else if (e.type == 'mcinput'){
+        if(ans == e.lastVal){
+            stopwatchStop();
+        }     
       }
-    }
-  }
+  });
   
-  function countStop(elm){
-    var v = elm.value;
-    return function(){
-      if(ans == v && event.keyCode == "13") {
-        stopwatchStop();
-      }
-    }
-    
-  }
-} );
+});
 
 //
 // アルファシス – alphasis.info – jQueryで作るストップウォッチ より引用
