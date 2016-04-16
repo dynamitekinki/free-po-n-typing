@@ -1,16 +1,26 @@
 $( function() {
     
-  var init = true, ans = "無料エロ動画";
+  var init = true;
+  var end = false;
+  var ans = "無料エロ動画";
   $("#inputarea > input[type='text']").mcInputEvent();
   $("#inputarea > input[type='text']").on('input mcinput', function (e){
       if( init && e.type == 'input'){
         stopwatchStart();
         init = false;
-      }else if (e.type == 'mcinput'){
+      } else if ( !init && e.type == 'mcinput'){
         if(ans == e.lastVal){
             stopwatchStop();
+            end = true;
         }     
       }
+  });
+  $("#inputarea > input[type='text']").on('keyup', function(e){
+        if ( !end && !init && e.keyCode == 9) {
+          stopwatchStop();
+          alert("不正！！");
+          end = true;
+        }
   });
   
 });
