@@ -1,8 +1,12 @@
-#timerblock {
+.typingarea {
   
- 
+}
+
+#timer {
+  font-size: 7rem;
 }
 
 #inputarea {
-  
+  font-size: 3.5rem;
+  text-align: center;
 }

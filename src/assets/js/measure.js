@@ -2,34 +2,36 @@ $( function() {
 
   var init = true;
   var ans = "無料エロ動画";
-  $("#inputarea > input[type='text']").mcInputEvent();
-  $("#inputarea > input[type='text']").on('input mcinput', function (e){
-    if( init ){
-      stopwatchStart();
-      init = false;
-    } 
+  $("#inputarea").mcInputEvent();
+  $("#inputarea").on({
+    'input mcinput': function (e){
+      if( init ){
+        stopwatchStart();
+        init = false;
+      } 
 
-    if ( e.type == 'mcinput' ){
-      if(ans == e.lastVal){
-        stopwatchStop();
+      if ( e.type == 'mcinput' ){
+        if(ans == e.lastVal){
+          stopwatchStop();
+          $(this).unbind();
+        }
+      }
+    },
+
+    'paste': function(e){
+      detectedCheat();
+      $(this).unbind();
+      return false;
+    },
+
+    'keyup': function(e){
+      if ( !init && e.keyCode == 9 ) {
+        detectedCheat();
         $(this).unbind();
       }
     }
   });
-
-  $("#inputarea > input[type='text']").on('paste', function(e){
-    detectedCheat();
-    $(this).unbind();
-    return false;
-  });
-
-  $("#inputarea > input[type='text']").on('keyup', function(e){
-    if ( !init && e.keyCode == 9 ) {
-      detectedCheat();
-      $(this).unbind();
-    }
-  });
-
+  
 });
 
 function detectedCheat () {
