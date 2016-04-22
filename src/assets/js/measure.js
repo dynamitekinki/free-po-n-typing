@@ -1,5 +1,10 @@
 $( function() {
+  fadeInView();
+  initialize();
+});
 
+function initialize (){
+  var foul = false;
   var init = true;
   var ans = "無料エロ動画";
   $("#inputarea").mcInputEvent();
@@ -21,6 +26,7 @@ $( function() {
     'paste': function(e){
       $(this).unbind();
       detectedCheat();
+      foul = true;
       return false;
     },
 
@@ -28,11 +34,22 @@ $( function() {
       if ( !init && e.keyCode == 9 ) {
         $(this).unbind();
         detectedCheat();
+        foul = true;
       }
     }
   });
   
-});
+  $("#reload").on({
+    'click' : function(e){
+      location.reload();
+    }
+  });
+}
+
+function fadeInView () {
+  $("body").toggle();
+  $("body").fadeIn(800);
+}
 
 function detectedCheat () {
   stopwatchStop();
