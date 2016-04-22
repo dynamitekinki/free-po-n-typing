@@ -19,15 +19,15 @@ $( function() {
     },
 
     'paste': function(e){
-      detectedCheat();
       $(this).unbind();
+      detectedCheat();
       return false;
     },
 
     'keyup': function(e){
       if ( !init && e.keyCode == 9 ) {
-        detectedCheat();
         $(this).unbind();
+        detectedCheat();
       }
     }
   });

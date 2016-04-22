@@ -1,4 +1,4 @@
-.typingarea {
+#typingarea {
   
 }
 
@@ -7,6 +7,12 @@
 }
 
 #inputarea {
-  font-size: 3.5rem;
+  font-size: 3rem;
   text-align: center;
+}
+
+#infoarea {
+      margin: 10pt;
+    padding: 0;
+  
 }
