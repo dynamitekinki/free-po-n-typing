@@ -11,6 +11,10 @@
 
 <title>Free Po*n Typing</title>
 
+<!-- Remodal CSS -->
+<link rel="stylesheet" href="assets/css/remodal.css">
+<link rel="stylesheet" href="assets/css/remodal-default-theme.css">
+
 <!-- Bootstrap Core CSS -->
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,6 +36,9 @@
 <!-- jQuery -->
 <script src="assets/js/jquery-2.2.1.min.js"></script>
 <script src="assets/js/jquery.mcInputEvent.js"></script>
+
+<!-- Remodal -->
+<script src="assets/js/remodal.min.js"></script>
 
 <script src="assets/js/measure.js"></script>
 
@@ -64,8 +71,9 @@
       <input id="inputarea" type="text" autofocus>
       
       <div id="infoarea">
-        <button type="button" id="reload" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>
-        <button type="button" id="knlink" class="btn btn-primary"
+        <button type="button" id="resultBtn" class="btn btn-primary">結果</button>
+        <button type="button" id="reloadBtn" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+        <button type="button" id="knlinkBtn" class="btn btn-primary"
                 onclick="location.href='http://asahi.co.jp/php/knight-scoop/search/search.php?mode=result&oa_date=20160304'">
           元ネタ
         </button>
@@ -74,6 +82,14 @@
 
   </div>
 </header>
+
+<div class="remodal" data-remodal-id="result" data-remodal-options="hashTracking:false">
+	<button data-remodal-action="close" class="remodal-close"></button>
+	<h1>タイトル</h1>
+	<p>コンテンツを記述します。</p>
+	<button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+	<button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+</div>
 
 </body>
 

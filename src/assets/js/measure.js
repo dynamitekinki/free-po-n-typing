@@ -19,6 +19,7 @@ function initialize (){
         if(ans == e.lastVal){
           stopwatchStop();
           $(this).unbind();
+          $('[data-remodal-id=result]').remodal().open();
         }
       }
     },
@@ -27,6 +28,7 @@ function initialize (){
       $(this).unbind();
       detectedCheat();
       foul = true;
+      $('[data-remodal-id=result]').remodal().open();
       return false;
     },
 
@@ -35,11 +37,18 @@ function initialize (){
         $(this).unbind();
         detectedCheat();
         foul = true;
+        $('[data-remodal-id=result]').remodal().open();
       }
     }
   });
   
-  $("#reload").on({
+  $("#reloadBtn").on({
+    'click' : function(e){
+      $('[data-remodal-id=result]').remodal().open();
+    }
+  });
+  
+  $("#resultBtn").on({
     'click' : function(e){
       location.reload();
     }
