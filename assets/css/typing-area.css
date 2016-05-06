@@ -1,0 +1,22 @@
+#typingarea {
+  
+}
+
+#resultBtn {
+  display: none;
+}
+
+#timer {
+  font-size: 7rem;
+}
+
+#inputarea {
+  font-size: 3rem;
+  text-align: center;
+}
+
+#infoarea {
+      margin: 10pt;
+    padding: 0;
+  
+}

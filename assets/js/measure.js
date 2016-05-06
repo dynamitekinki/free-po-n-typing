@@ -1,0 +1,120 @@
+$( function() {
+  fadeInView();
+  initialize();
+});
+
+function initialize (){
+  var foul = false;
+  var init = true;
+  var ans = "無料エロ動画";
+  $("#inputarea").mcInputEvent();
+  $("#inputarea").on({
+    'input mcinput': function (e){
+      if( init ){
+        stopwatchStart();
+        init = false;
+      } 
+
+      if ( e.type == 'mcinput' ){
+        if(ans == e.lastVal){
+          stopwatchStop();
+          $(this).unbind();
+          $('[data-remodal-id=result]').remodal().open();
+        }
+      }
+    },
+
+    'paste': function(e){
+      $(this).unbind();
+      detectedCheat();
+      foul = true;
+      $('[data-remodal-id=result]').remodal().open();
+      return false;
+    },
+
+    'keyup': function(e){
+      if ( !init && e.keyCode == 9 ) {
+        $(this).unbind();
+        detectedCheat();
+        foul = true;
+        $('[data-remodal-id=result]').remodal().open();
+      }
+    }
+  });
+  
+  $("#reloadBtn").on({
+    'click' : function(e){
+      $('[data-remodal-id=result]').remodal().open();
+    }
+  });
+  
+  $("#resultBtn").on({
+    'click' : function(e){
+      location.reload();
+    }
+  });
+}
+
+function fadeInView () {
+  $("body").toggle();
+  $("body").fadeIn(800);
+}
+
+function detectedCheat () {
+  stopwatchStop();
+  alert("不正！！");
+}
+
+//
+// アルファシス – alphasis.info – jQueryで作るストップウォッチ より引用
+// http://alphasis.info/2013/06/jquery-gyakubiki-stopwatch/
+// 新バージョンのjQueryに対応のため少し改変
+//
+
+var $stopwatch, $enable = false, $stopwatchTime, $startTime, $stopwatchTimeAdd = 0;
+
+function stopwatchStart() {
+  if( $startTime === undefined ){
+    var $startDate = new Date();
+    $startTime = $startDate.getTime();
+  }
+  var $nowDate = new Date();
+  $stopwatchTime = $nowDate.getTime() - $startTime + $stopwatchTimeAdd;
+  $stopwatchMillisecond = $stopwatchTime % 1000;
+  $stopwatchSecond = Math.floor( $stopwatchTime / 1000 ) % 60;
+  $stopwatchMinute = Math.floor( $stopwatchTime / 1000 / 60 ) % 60;
+  $stopwatchHour = Math.floor( Math.floor( $stopwatchTime / 1000 / 60 ) / 60 );
+  if( $stopwatchMillisecond < 10 ){
+    $stopwatchMillisecond = '0' + $stopwatchMillisecond;
+  }
+  if( $stopwatchMillisecond < 100 ){
+    $stopwatchMillisecond = '0' + $stopwatchMillisecond;
+  }
+  if( $stopwatchSecond < 10 ){
+    $stopwatchSecond = '0' + $stopwatchSecond;
+  }
+  if( $stopwatchMinute < 10 ){
+    $stopwatchMinute = '0' + $stopwatchMinute;
+  }
+  if( $stopwatchHour < 10 ){
+    $stopwatchHour = '0' + $stopwatchHour;
+  }
+  $( '#timerMinute' ).text( $stopwatchMinute );
+  $( '#timerSecond' ).text( $stopwatchSecond );
+  $( '#timerMillisecond' ).text( $stopwatchMillisecond );
+  $stopwatch = setTimeout( "stopwatchStart()", 1 );
+}
+
+function stopwatchStop() {
+  clearTimeout( $stopwatch );
+  $startTime = undefined;
+  $stopwatchTimeAdd = $stopwatchTime;
+}
+
+function stopwatchClear() {
+  $startTime = undefined;
+  $stopwatchTimeAdd = 0;
+  $( '#stopwatchMinute' ).text( '00' );
+  $( '#stopwatchSecond' ).text( '00' );
+  $( '#stopwatchMillisecond' ).text( '000' );
+}
