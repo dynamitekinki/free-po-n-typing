@@ -2,6 +2,10 @@
   
 }
 
+#resultBtn {
+  display: none;
+}
+
 #timer {
   font-size: 7rem;
 }
