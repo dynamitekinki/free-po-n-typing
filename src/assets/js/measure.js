@@ -1,58 +1,71 @@
+var ans = "無料エロ動画";
+
 $( function() {
-  fadeInView();
-  initialize();
+  start();
 });
 
-function initialize (){
+function start (){
+  fadeInView();
+  mainloop();
+}
+
+function restart (){
+  $("#inputarea").val("");
+  $("#inputarea").focus();
+  start();
+}
+
+function mainloop (){
   var foul = false;
   var init = true;
-  var ans = "無料エロ動画";
+  stopwatchStop();
+  stopwatchClear();
   $("#inputarea").mcInputEvent();
   $("#inputarea").on({
-    'input mcinput': function (e){
+    'input2 mcinput': function (e){
       if( init ){
         stopwatchStart();
         init = false;
       } 
 
-      if ( e.type == 'mcinput' ){
+      if ( e.type == 'input2' ){
         if(ans == e.lastVal){
           stopwatchStop();
-          $(this).unbind();
-          $('[data-remodal-id=result]').remodal().open();
+          $("#inputarea").mcInputEvent("destroy");
+          $("#inputarea").unbind("mcInputEvent");
+          return true;
         }
       }
     },
 
+    // ペースト、タブキー(予測変換)は不正として処理
+
     'paste': function(e){
-      $(this).unbind();
       detectedCheat();
-      foul = true;
-      $('[data-remodal-id=result]').remodal().open();
       return false;
     },
 
     'keyup': function(e){
       if ( !init && e.keyCode == 9 ) {
-        $(this).unbind();
         detectedCheat();
-        foul = true;
-        $('[data-remodal-id=result]').remodal().open();
       }
     }
   });
-  
+
   $("#reloadBtn").on({
     'click' : function(e){
-      $('[data-remodal-id=result]').remodal().open();
+      // location.reload();
+      restart();
     }
   });
-  
-  $("#resultBtn").on({
+
+  $("#rm_reloadBtn").on({
     'click' : function(e){
-      location.reload();
+      // location.reload();
+      restart();
     }
   });
+
 }
 
 function fadeInView () {
@@ -61,8 +74,11 @@ function fadeInView () {
 }
 
 function detectedCheat () {
+  $("#inputarea").mcInputEvent("destroy");
+  $("#inputarea").unbind("mcInputEvent");
   stopwatchStop();
-  alert("不正！！");
+  foul = true;
+  $('[data-remodal-id=fault]').remodal().open();
 }
 
 //
@@ -114,7 +130,7 @@ function stopwatchStop() {
 function stopwatchClear() {
   $startTime = undefined;
   $stopwatchTimeAdd = 0;
-  $( '#stopwatchMinute' ).text( '00' );
-  $( '#stopwatchSecond' ).text( '00' );
-  $( '#stopwatchMillisecond' ).text( '000' );
+  $( '#timerMinute' ).text( '00' );
+  $( '#timerSecond' ).text( '00' );
+  $( '#timerMillisecond' ).text( '000' );
 }
